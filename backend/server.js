@@ -1,6 +1,9 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const products = require("./data/products");
+// const express = require("express");  /// Common JS format node version should v14+
+// const dotenv = require("dotenv");
+// const products = require("./data/products");
+import express from "express";
+import dotenv from "dotenv";
+import products from "./data/products.js";
 
 dotenv.config();
 
