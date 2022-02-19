@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = mongoose.Schema(
   {
@@ -21,9 +22,11 @@ const userSchema = mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-const User = mongoose.model("Order", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

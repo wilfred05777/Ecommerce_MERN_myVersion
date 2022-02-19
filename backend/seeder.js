@@ -10,10 +10,11 @@ import connectDB from "./config/db.js";
 
 dotenv.config();
 
-connectDB();
+await connectDB();
 
 const importData = async () => {
   try {
+    await connectDB();
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
@@ -38,6 +39,7 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
+    await connectDB();
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();

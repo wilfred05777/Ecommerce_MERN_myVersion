@@ -53,6 +53,7 @@ const deleteProducts = async () => {
   }
 };
 
-importUsers();
+export default importUsers;
+// importUsers();
 // importProducts();
 // deleteProducts();
