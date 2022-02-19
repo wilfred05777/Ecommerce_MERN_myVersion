@@ -21,10 +21,10 @@ const orderSchema = mongoose.Schema(
       },
     ],
     shippingAddress: {
-      address: { types: String, required: true },
-      city: { types: String, required: true },
-      postalCode: { types: String, required: true },
-      country: { types: String, required: true },
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
     },
     paymentMethod: {
       type: String,
@@ -68,7 +68,9 @@ const orderSchema = mongoose.Schema(
       type: Date,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Order = mongoose.model("Order", orderSchema);
