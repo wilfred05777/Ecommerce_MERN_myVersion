@@ -24,18 +24,19 @@ router.get(
     //   const product = products.find((p) => p._id === req.params.id);
     const product = await Product.findById(req.params.id);
 
-    try {
-      if (!product) {
-        res.json("Product not found!");
-      }
+    if (product) {
       res.json(product);
-    } catch (error) {
-      next(error);
+    } else {
+      res.status(404).json({ message: "Product not found" });
     }
-    // if (product) {
+
+    // try {
+    //   if (!product) {
+    //     res.json("Product not found!");
+    //   }
     //   res.json(product);
-    // } else {
-    //   res.status(404).json({ message: "Product not found" });
+    // } catch (error) {
+    //   next(error);
     // }
   })
 );
