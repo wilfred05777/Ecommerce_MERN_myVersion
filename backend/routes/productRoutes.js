@@ -11,6 +11,8 @@ router.get(
   AsyncHandler(async (req, res) => {
     //   res.send("API PRODUCTS");
     const products = await Product.find({});
+    // res.status(401);
+    // throw new Error("Not Authorize");
     res.json(products);
   })
 );
