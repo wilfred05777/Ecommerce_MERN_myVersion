@@ -7,7 +7,7 @@ const contacts = [
   {
     name: "Rowena",
     email: "rowena@gmail.com",
-    message: "Testing Contact form",
+    message: "Testing Contact formss",
   },
 ];
 
