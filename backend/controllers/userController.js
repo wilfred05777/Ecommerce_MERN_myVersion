@@ -1,5 +1,5 @@
 import AsyncHandler from "express-async-handler";
-
+import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 
 // @desc Auth user & get token
@@ -17,7 +17,7 @@ const authUser = AsyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: null,
+      token: generateToken(user._id),
     });
 
     /// if user & password does not match
