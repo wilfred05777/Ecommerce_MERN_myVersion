@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import colors from "colors";
 import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
@@ -16,6 +17,7 @@ connectDB();
 
 const app = express();
 
+//// it will allow us to accept json data in the body
 app.use(express.json());
 
 /// ROUTES
@@ -24,6 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);
 
 // Middleware
