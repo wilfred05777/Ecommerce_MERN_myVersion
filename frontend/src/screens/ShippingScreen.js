@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer.js";
@@ -15,23 +14,17 @@ const ShippingScreen = ({ match, history }) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
 
-  // const [address, setAddress] = useState("");
-  // const [city, setCity] = useState("");
-  // const [postalCode, setPostalCode] = useState("");
-  // const [country, setCountry] = useState("");
-
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
-
     history.push("/payment");
   };
 
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2 />
+      <CheckoutSteps step1 step2 step3 />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address" className="mb-3">
