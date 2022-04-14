@@ -30,15 +30,15 @@ const OrderScreen = ({ match }) => {
     //// ==== end Calculate Prices =====
   }
 
-  // useEffect(() => {
-  //   dispatch(getOrderDetails(orderId));
-  // }, [dispatch, orderId]);
+  useEffect(() => {
+    dispatch(getOrderDetails(orderId));
+  }, [dispatch, orderId]);
 
-  useEffect(() =>{
-    if(!order || order._id === orderId){
-      dispatch(getOrderDetails(orderId));
-    }
-  }, [order, orderId])
+  // useEffect(() =>{
+  //   if(!order || order._id === orderId){
+  //     dispatch(getOrderDetails(orderId));
+  //   }
+  // }, [dispatch, orderId])
 
   return loading ? (
     <Loader />
