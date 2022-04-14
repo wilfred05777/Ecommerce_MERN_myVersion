@@ -10,6 +10,9 @@ import { Link } from "react-router-dom";
 
 import { createOrder } from "../actions/orderActions.js";
 
+// import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+// import { USER_DETAILS_RESET } from '../constants/userConstants'
+
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -35,6 +38,7 @@ const PlaceOrderScreen = ({ history }) => {
   ).toFixed(2);
 
   const orderCreate = useSelector((state) => state.orderCreate);
+
   const { order, success, error } = orderCreate;
 
   useEffect(() => {
@@ -48,7 +52,7 @@ const PlaceOrderScreen = ({ history }) => {
     // console.log("place order");
     dispatch(
       createOrder({
-        orderitems: cart.cartItems,
+        orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
