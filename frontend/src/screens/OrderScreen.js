@@ -30,9 +30,15 @@ const OrderScreen = ({ match }) => {
     //// ==== end Calculate Prices =====
   }
 
-  useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId]);
+  // useEffect(() => {
+  //   dispatch(getOrderDetails(orderId));
+  // }, [dispatch, orderId]);
+
+  useEffect(() =>{
+    if(!order || order._id === orderId){
+      dispatch(getOrderDetails(orderId));
+    }
+  }, [order, orderId])
 
   return loading ? (
     <Loader />
@@ -59,12 +65,16 @@ const OrderScreen = ({ match }) => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
+              {order.isDelivered ? <Message>Delivered on {order.deliveredAt}</Message>: <Message variant="danger">Not Delivered</Message>}
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2> Payment Method</h2>
-              <strong>Method: </strong>
-              {order.paymentMethod}
+              <p>
+                <strong>Method: </strong>
+                {order.paymentMethod}
+              </p>
+              {order.isPaid ? <Message>Paid On { order.paidAt}</Message>: <Message variant="danger">Not Paid</Message>}
             </ListGroup.Item>
 
             <ListGroup.Item>
