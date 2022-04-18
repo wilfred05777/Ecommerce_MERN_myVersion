@@ -2,6 +2,7 @@ import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import React, { useEffect, useState } from "react";
 import {
+  Button,
   Card,
   Col,
   Image,
@@ -27,6 +28,9 @@ const OrderScreen = ({ match, history }) => {
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -81,9 +85,18 @@ const OrderScreen = ({ match, history }) => {
   //   }
   // }, [dispatch, orderId])
 
+  // const successPaymentHandler = (paymentResult) => {
+  //   console.log(paymentResult);
+  //   dispatch(payOrder(orderId, paymentResult));
+  // };
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
+  };
+
+  const deliverHandler = () => {
+    // eslint-disable-next-line no-undef
+    dispatch(deliverOrder(order));
   };
 
   return loading ? (
@@ -206,6 +219,21 @@ const OrderScreen = ({ match, history }) => {
                       onSuccess={successPaymentHandler}
                     />
                   )}
+                  {loadingDeliver && <Loader />}
+                  {userInfo &&
+                    userInfo.isAdmin &&
+                    order.isPaid &&
+                    !order.isDelivered && (
+                      <ListGroup.Item>
+                        <Button
+                          type="button"
+                          className="btn btn-block"
+                          onClick={deliverHandler}
+                        >
+                          Mark As Delivered
+                        </Button>
+                      </ListGroup.Item>
+                    )}
                 </ListGroupItem>
               )}
             </ListGroup>
