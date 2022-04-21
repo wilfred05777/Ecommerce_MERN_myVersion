@@ -21,6 +21,7 @@ const UserEditScreen = ({ match, history }) => {
   const { loading, error, user } = userDetails;
 
   const userUpdate = useSelector((state) => state.userUpdate);
+
   const {
     loading: loadingUpdate,
     error: errorUpdate,
@@ -83,7 +84,6 @@ const UserEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="isadmin">
-              <Form.Label>Password</Form.Label>
               <Form.Check
                 type="checkbox"
                 placeholder="Enter Password"
