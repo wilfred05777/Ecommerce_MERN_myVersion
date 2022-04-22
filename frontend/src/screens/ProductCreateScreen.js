@@ -6,12 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer.js";
-import { listProductDetails, createProduct } from "../actions/productActions";
+import { createProduct } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 const ProductCreateScreen = ({ match, history }) => {
-  const productId = match.params.id;
-
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
@@ -37,27 +35,21 @@ const ProductCreateScreen = ({ match, history }) => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
       history.push("/admin/productlist");
-    } else {
-      if (!product.name || product._id !== productId) {
-        dispatch(listProductDetails(productId));
-      } else {
-        setName(product.name);
-        setPrice(product.price);
-        setImage(product.image);
-        setBrand(product.brand);
-        setCategory(product.category);
-        setCountInStock(product.countInStock);
-        setDescription(product.description);
-      }
     }
-  }, [dispatch, history, product, successCreate, productId]);
+    setName(product.name);
+    setPrice(product.price);
+    setImage(product.image);
+    setBrand(product.brand);
+    setCategory(product.category);
+    setCountInStock(product.countInStock);
+    setDescription(product.description);
+  }, [dispatch, history, product, successCreate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     //// CREATE Product
     dispatch(
       createProduct({
-        _id: productId,
         name,
         price,
         image,
