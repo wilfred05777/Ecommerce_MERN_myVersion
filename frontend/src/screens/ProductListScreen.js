@@ -84,17 +84,17 @@ const ProductListScreen = ({ history, match }) => {
           <h1>Products</h1>
         </Col>
         <Col>
-          {/* <Button className="float-sm-end my-3" onClick={createProductHandler}>
+          <Button className="float-sm-end my-3" onClick={createProductHandler}>
             <i className="fas fa-plus"></i>
             Create Product
-          </Button> */}
+          </Button>
 
-          <Link to="/admin/createproduct">
+          {/* <Link to="/admin/createproduct">
             <Button className="float-sm-end my-3">
               <i className="fas fa-plus"></i>
               Create Product
             </Button>
-          </Link>
+          </Link> */}
         </Col>
       </Row>
       {loadingDelete && <Loader />}
