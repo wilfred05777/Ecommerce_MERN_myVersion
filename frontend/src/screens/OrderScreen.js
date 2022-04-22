@@ -77,7 +77,7 @@ const OrderScreen = ({ match, history }) => {
     }
     // addPayPalScript()
     // dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, history, userInfo, orderId, successPay, order, successDeliver]);
 
   // useEffect(() =>{
   //   if(!order || order._id === orderId){

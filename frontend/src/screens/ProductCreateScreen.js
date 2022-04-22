@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer.js";
-import { listProductDetails, updateProduct } from "../actions/productActions";
-import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import { listProductDetails, createProduct } from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
-const ProductEditScreen = ({ match, history }) => {
+const ProductCreateScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState("");
@@ -26,16 +26,16 @@ const ProductEditScreen = ({ match, history }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  const productUpdate = useSelector((state) => state.productUpdate);
+  const productCreate = useSelector((state) => state.productCreate);
   const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = productUpdate;
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+  } = productCreate;
 
   useEffect(() => {
-    if (successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
       history.push("/admin/productlist");
     } else {
       if (!product.name || product._id !== productId) {
@@ -50,13 +50,13 @@ const ProductEditScreen = ({ match, history }) => {
         setDescription(product.description);
       }
     }
-  }, [dispatch, history, productId, product, successUpdate]);
+  }, [dispatch, history, product, successCreate, productId]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //// Update Product
+    //// CREATE Product
     dispatch(
-      updateProduct({
+      createProduct({
         _id: productId,
         name,
         price,
@@ -94,11 +94,10 @@ const ProductEditScreen = ({ match, history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit Product</h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
-        {/* {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>} */}
+        <h1>Create Product</h1>
+        {loadingCreate && <Loader />}
+        {errorCreate && <Message variant="danger">{errorCreate}</Message>}
+
         {loading ? (
           <Loader />
         ) : error ? (
@@ -133,10 +132,8 @@ const ProductEditScreen = ({ match, history }) => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
-
               <Form.Control
                 type="file"
-                id="image-file"
                 label="Choose File"
                 onChange={uploadFileHandler}
               ></Form.Control>
@@ -184,7 +181,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Button type="submit" variant="primary">
-              Update
+              Add Product
             </Button>
           </Form>
         )}
@@ -193,4 +190,4 @@ const ProductEditScreen = ({ match, history }) => {
   );
 };
 
-export default ProductEditScreen;
+export default ProductCreateScreen;

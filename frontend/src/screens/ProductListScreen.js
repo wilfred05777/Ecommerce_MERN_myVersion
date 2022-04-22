@@ -14,6 +14,7 @@ import {
 } from "../actions/productActions";
 
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import { Link } from "react-router-dom";
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -87,6 +88,12 @@ const ProductListScreen = ({ history, match }) => {
             <i className="fas fa-plus"></i>
             Create Product
           </Button>
+          {/* <Link to="/admin/createproduct">
+            <Button className="float-sm-end my-3">
+              <i className="fas fa-plus"></i>
+              Create Product
+            </Button>
+          </Link> */}
         </Col>
       </Row>
       {loadingDelete && <Loader />}
