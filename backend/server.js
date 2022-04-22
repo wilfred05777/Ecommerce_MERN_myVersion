@@ -7,6 +7,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import colors from "colors";
+import morgan from "morgan";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
@@ -19,6 +20,11 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// setting codition to be usable only in development
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 //// it will allow us to accept json data in the body
 app.use(express.json());
