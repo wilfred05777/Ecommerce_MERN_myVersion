@@ -6,7 +6,9 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listProducts } from "../actions/productActions";
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
   const dispatch = useDispatch(); /// using hooks
 
   // step2: useSelector to grab the list of Products from the state
@@ -17,8 +19,8 @@ const HomeScreen = () => {
 
   // step1: fire the lists through action
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   // const products = [];
 

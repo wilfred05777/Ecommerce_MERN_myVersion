@@ -7,7 +7,16 @@ import Product from "../models/productModel.js";
 // @access Public
 const getProducts = AsyncHandler(async (req, res) => {
   //   res.send("API PRODUCTS");
-  const products = await Product.find({});
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const products = await Product.find({ ...keyword });
   // res.status(401);
   // throw new Error("Not Authorize");
   res.json(products);
