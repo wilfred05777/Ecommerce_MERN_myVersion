@@ -186,15 +186,18 @@ const ProductScreen = ({ history, match }) => {
                       <Form.Group controlId="comment">
                         <Form.Label>Comment</Form.Label>
                         <Form.Control
+                          className="mb-3"
                           as="textarea"
                           row="3"
                           value={comment}
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type="submit" variant="primary">
-                        Submit
-                      </Button>
+                      <Form.Group className="btn-block">
+                        <Button type="submit" variant="primary">
+                          Submit
+                        </Button>
+                      </Form.Group>
                     </Form>
                   ) : (
                     <Message>
