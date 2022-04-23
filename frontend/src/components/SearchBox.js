@@ -5,6 +5,7 @@ import {
   FormControl,
   InputGroup,
   Container,
+  FormGroup,
 } from "react-bootstrap";
 
 const SearchBox = ({ history }) => {
@@ -20,7 +21,7 @@ const SearchBox = ({ history }) => {
   };
 
   return (
-    // <InputGroup className="mb-3 mr-sm-2 ml-sm-5">
+    // <InputGroup style={{ width: "40%" }}>
     //   <FormControl
     //     placeholder="Recipient's username"
     //     aria-label="Recipient's username"
@@ -30,24 +31,18 @@ const SearchBox = ({ history }) => {
     //     Button
     //   </Button>
     // </InputGroup>
-    <Container>
-      <InputGroup onSubmit={submitHandler} inline="true">
-        <Form.Control
-          xs={6}
-          md={4}
-          lg={2}
-          type="text"
-          name="q"
-          onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Search Products..."
-          className="mr-sm-2 ml-sm-5"
-        ></Form.Control>
 
-        <Button type="submit" variant="outline-success " className="p-2">
-          Search
-        </Button>
-      </InputGroup>
-    </Container>
+    <Form style={{ display: "flex" }} onSubmit={submitHandler} inline="true">
+      <Form.Control
+        type="text"
+        name="q"
+        onChange={(e) => setKeyword(e.target.value)}
+        placeholder="Search Products..."
+      ></Form.Control>
+      <Button type="submit" variant="outline-success " className="p-2">
+        Search
+      </Button>
+    </Form>
   );
 };
 
