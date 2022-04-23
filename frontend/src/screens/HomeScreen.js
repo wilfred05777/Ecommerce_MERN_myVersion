@@ -4,10 +4,14 @@ import { Col, Row } from "react-bootstrap";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Paginate from "../components/Paginate";
+
 import { listProducts } from "../actions/productActions";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
+
+  const pageNumber = match.params.pageNumber || 1;
 
   const dispatch = useDispatch(); /// using hooks
 
@@ -15,12 +19,12 @@ const HomeScreen = ({ match }) => {
   const productList = useSelector((state) => state.productList);
 
   // step3: pull out
-  const { loading, error, products } = productList;
+  const { loading, error, products, pages, page } = productList;
 
   // step1: fire the lists through action
   useEffect(() => {
-    dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProducts(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   // const products = [];
 
@@ -34,15 +38,22 @@ const HomeScreen = ({ match }) => {
         // <h3>{error}</h3>
         <Message variant="danger">{error}</Message>
       ) : (
-        <Row>
-          {/* step4: display the output */}
-          {products.map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              {/* <h3>{product.name}</h3> */}
-              <Product product={product} />
-            </Col>
-          ))}
-        </Row>
+        <>
+          <Row>
+            {/* step4: display the output */}
+            {products.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                {/* <h3>{product.name}</h3> */}
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ""}
+          />
+        </>
       )}
     </>
   );
