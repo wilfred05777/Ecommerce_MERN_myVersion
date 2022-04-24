@@ -15,7 +15,7 @@ const HomeScreen = ({ match }) => {
 
   const pageNumber = match.params.pageNumber || 1;
 
-  const dispatch = useDispatch(); /// using hooks
+  const dispatch = useDispatch(); //// using hooks
 
   // step2: useSelector to grab the list of Products from the state
   const productList = useSelector((state) => state.productList);
