@@ -217,8 +217,8 @@ export const listTopProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST });
 
-    // make request in this end point
     const { data } = await axios.get(`/api/products/top`);
+
     dispatch({
       type: PRODUCT_TOP_SUCCESS,
       payload: data,
